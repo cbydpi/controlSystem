@@ -1,27 +1,94 @@
 <template>
-  <el-menu
-    class="el-menu-vertical-demo"
-    background-color="#545c64"
-    text-color="#fff"
-    active-text-color="#ffd04b"
-    router=true>
-    <el-menu-item index="main">
-      <i class="el-icon-menu"></i>
-      <span slot="title">导航二</span>
-    </el-menu-item>
-    <el-menu-item index="ice-screen">
-      <i class="el-icon-document"></i>
-      <span slot="title">导航三</span>
-    </el-menu-item>
-    <el-menu-item index="vertical-adm">
-      <i class="el-icon-setting"></i>
-      <span slot="title">导航四</span>
-    </el-menu-item>
-  </el-menu>
+  <div class="slide_bar">
+    <el-menu
+      :default-active='this.$route.path'
+      style="height:100%;text-align: center;"
+      background-color="#187afe"
+      text-color="#fff"
+      active-text-color='#fff'
+      active-color="#0057cc"
+      :router="true">
+      <div class="logo">
+        <p class="logo_text">
+          <span class="cn">济南新材料产业园区</span><br>
+          <span class="en">JINAN NEW MATERIALS INDUSTRY ZONE</span>
+        </p>
+      </div>
+      <el-menu-item index="/home">
+        <span slot="title" style="font-size: 24px;">全景</span>
+        <i class="el-icon-arrow-right nav-right"></i>
+      </el-menu-item>
+      <el-menu-item index="/ice-screen">
+        <span slot="title" style="font-size: 24px;">冰屏</span>
+        <i class="el-icon-arrow-right nav-right"></i>
+      </el-menu-item>
+      <el-menu-item index="/vertical-adm">
+        <span slot="title" style="font-size: 24px;">立式终端机</span>
+        <i class="el-icon-arrow-right nav-right"></i>
+      </el-menu-item>
+      <el-menu-item index="/splice-screen">
+        <span slot="title" style="font-size: 24px;">拼接屏</span>
+        <i class="el-icon-arrow-right nav-right"></i>
+      </el-menu-item>
+      <el-menu-item index="/wall-hanging-adm">
+        <span slot="title" style="font-size: 24px;">企业展区</span>
+        <i class="el-icon-arrow-right nav-right"></i>
+      </el-menu-item>
+    </el-menu>
+  </div>
 </template>
 
 <script>
+export default {
+  data () {
+    return {}
+  }
+}
 </script>
 
-<style>
+<style lang="scss" scoped="scoped">
+.slide_bar{
+  height: 100%;
+}
+.el-menu{
+  border: none;
+}
+.el-menu-item{
+  height: 90px !important;
+  line-height: 90px !important;
+}
+.logo{
+  width: 220px;
+  height: 200px;
+  background-image: url(../../../static/img/logo.png);
+  background-size: 110px 110px;
+  background-repeat: no-repeat;
+  background-position: 45px 0px;
+   span{
+    color: #FFFFFF;
+  }
+  .logo_text{
+    position: relative;
+    top: 130px;
+    text-align: center;
+  }
+  .cn{
+    border-bottom: solid 1px rgba(255,255,255,.5);
+    font-size: 16px;
+  }
+  .en{
+    font-size: 10px;
+  }
+}
+.nav-right{
+  color: #fff;
+  font-size: 24px;
+  position: absolute;
+  right: 0;
+  line-height: 90px;
+}
+.is-active{
+  background-color: #0057cc !important;
+}
+
 </style>
