@@ -8,7 +8,7 @@
         <el-header>
           <nav-bar></nav-bar>
         </el-header>
-        <el-main>
+        <el-main style='height: 100%;'>
           <router-view></router-view>
         </el-main>
       </el-container>

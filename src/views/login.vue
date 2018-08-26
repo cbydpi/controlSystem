@@ -5,12 +5,12 @@
       <div class="form_style">
         <el-form ref='form' :model='form' label-width='80px' size='medium' :rules='rules'>
           <el-form-item label='用户名：' prop='username'>
-            <el-input v-model='form.username' placeholder='请输入你的用户名' @keyup.enter.native='submit()'>
+            <el-input v-model='form.username' placeholder='请输入你的用户名' @keyup.enter.native='submit()' clearable>
               <i slot='prefix' class="cbiconfont cbicon-user"></i>
             </el-input>
           </el-form-item>
           <el-form-item label='密码：' prop='password'>
-            <el-input v-model='form.password' placeholder='请输入密码' @keyup.enter.native='submit()'>
+            <el-input v-model='form.password' placeholder='请输入密码' @keyup.enter.native='submit()' clearable>
               <i slot='prefix' class="cbiconfont cbicon-password"></i>
             </el-input>
           </el-form-item>
@@ -76,7 +76,7 @@ export default {
     left: 0;
     bottom: 0;
     right: 0;
-    background-image: url(../../static/img/login_bg_b.png);
+    background-image: url(../assets/img/login_bg_b.png);
     >.bg_s{
       position: absolute;
       top: 0;
@@ -86,7 +86,7 @@ export default {
       width: 500px;
       height: 400px;
       margin: auto;
-      background: url(../../static/img/login_bg_s.png);
+      background: url(../assets/img/login_bg_s.png);
       background-size: 100% 100%;
       background-repeat: no-repeat;
       >.header_top{

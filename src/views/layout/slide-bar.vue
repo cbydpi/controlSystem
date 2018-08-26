@@ -2,7 +2,7 @@
   <div class="slide_bar">
     <el-menu
       :default-active='this.$route.path'
-      style="height:100%;text-align: center;"
+      style="height:100%;text-align: center;overflow: hidden;"
       background-color="#187afe"
       text-color="#fff"
       active-text-color='#fff'
@@ -60,7 +60,7 @@ export default {
 .logo{
   width: 220px;
   height: 200px;
-  background-image: url(../../../static/img/logo.png);
+  background-image: url(../../assets/img/logo.png);
   background-size: 110px 110px;
   background-repeat: no-repeat;
   background-position: 45px 0px;

@@ -4,7 +4,7 @@
     <div class="user_info">
       <i class="cbiconfont cbicon-yonghu"></i>&nbsp;&nbsp;
       {{username}}&nbsp;&nbsp;
-      <i class="el-icon-refresh" style="font-size: 26px;" @click="refresh"></i>&nbsp;&nbsp;
+      <i class="el-icon-refresh" style="font-size: 26px;cursor: pointer;" @click="refresh"></i>&nbsp;&nbsp;
       <i class="cbiconfont cbicon-tuichu" @click="signout"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
   </div>
