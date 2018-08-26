@@ -194,7 +194,7 @@ export default {
   padding: 2% 5% 0 5%;
   background: url(../assets/img/machine_up.png),url(../assets/img/machine_down.png);
   background-repeat: no-repeat;
-  background-position: 320px 70px,320px 260px;
+  background-position: center 70px,center 260px;
   background-size: 150px 150px,150px 150px;
 }
 .allWake{
