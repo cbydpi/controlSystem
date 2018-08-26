@@ -60,10 +60,10 @@ export default {
       this.$message.error('网络无连接,请连网使用')
     }
     window.addEventListener('online', function () {
-      alert('online')
+
     })
     window.addEventListener('offline', function () {
-      alert('offline')
+
     })
   },
   watch: {
