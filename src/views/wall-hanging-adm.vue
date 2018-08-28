@@ -102,7 +102,7 @@ export default {
     },
     allWake: function () {
       let data = {
-        device: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+        deviceId: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
         status: 1,
         myDevice: 0
       }
@@ -110,7 +110,7 @@ export default {
     },
     allStandby: function () {
       let data = {
-        device: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+        deviceId: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
         status: 0,
         myDevice: 0
       }
@@ -137,7 +137,7 @@ export default {
     chatMode: function (id, online) {
       if (online === 1) {
         let data = {
-          device: [id],
+          deviceId: [id],
           status: 2,
           myDevice: 0
         }
@@ -149,7 +149,7 @@ export default {
     videoMode: function (id, online) {
       if (online === 1) {
         let data = {
-          device: [id],
+          deviceId: [id],
           status: 1,
           myDevice: 0
         }

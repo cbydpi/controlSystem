@@ -3,11 +3,12 @@
     <div class="vertical_adm_main">
       <span :class="onlineStatus === 1 ? 'online': 'offline'"></span>
       <p class="vertical_adm_real"></p>
-      <div style="text-align: center;display: inline-block;float: right;margin-top: 60px;">
-        <span style="font-size: 24px;float: left;margin-top: 20px;margin-left: 30px;margin-right: 20px;">立式终端机</span>
+      <div style="text-align: center;display: inline-block;float: right;margin-top: 40px;">
+        <span style="font-size: 24px;float: left;margin-top: 50px;margin-left: 30px;margin-right: 20px;margin-bottom: 50px;">立式终端机</span>
         <span class="current_mode">{{currentMode}}</span>
         <el-button type="primary" class="button_1" @click='standbyMode'>待机模式</el-button><br>
-        <el-button type="warning" class='button_2' @click='videoMode'>视频模式</el-button>
+        <el-button type="warning" class='button_2' @click='videoMode'>视频模式</el-button><br />
+        <el-button type="warning" class='button_3' @click='chatMode'>交互模式</el-button>
       </div>
     </div>
   </div>
@@ -43,11 +44,15 @@ export default {
       console.log('连接成功')
     },
     wsMessage: function (evt) {
-      this.onlineStatus = JSON.parse(evt.data)[1].online
-      if (JSON.parse(evt.data)[0].status === 0 && this.onlineStatus === 1) {
-        this.currentMode = '待机模式'
-      } else if (JSON.parse(evt.data)[0].status === 1 && this.onlineStatus === 1) {
-        this.currentMode = '视频模式'
+      if (JSON.parse(evt.data).code === undefined) {
+        this.onlineStatus = JSON.parse(evt.data)[1].online
+        if (JSON.parse(evt.data)[1].status === 0 && this.onlineStatus === 1) {
+          this.currentMode = '待机模式'
+        } else if (JSON.parse(evt.data)[1].status === 1 && this.onlineStatus === 1) {
+          this.currentMode = '视频模式'
+        }
+      } else {
+        this.$message.success('发送成功')
       }
     },
     wsClose: function () {
@@ -56,7 +61,7 @@ export default {
     standbyMode: function () {
       if (this.onlineStatus === 1) {
         let data = {
-          device: [2],
+          deviceId: [2],
           status: 0,
           myDevice: 0
         }
@@ -69,8 +74,21 @@ export default {
     videoMode: function () {
       if (this.onlineStatus === 1) {
         let data = {
-          device: [2],
+          deviceId: [2],
           status: 1,
+          myDevice: 0
+        }
+        console.log(data)
+        this.webSocket.send(JSON.stringify(data))
+      } else {
+        this.$message.error('此设备不在线!')
+      }
+    },
+    chatMode: function () {
+      if (this.onlineStatus === 1) {
+        let data = {
+          deviceId: [2],
+          status: 2,
           myDevice: 0
         }
         console.log(data)
@@ -134,11 +152,19 @@ export default {
   margin-top: -20px;
 }
 .button_2{
-  margin-top: 18px;
+  margin-top: 10px;
   border-radius: 10px;
   font-size: 18px;
   background-image: -webkit-gradient(linear,0 0,0 bottom, from(rgba(255, 217, 30, 1)),to(rgba(255, 160, 30, 1)));
   border: none;
+}
+.button_3{
+  border-radius: 10px;
+  font-size: 18px;
+  background-image: -webkit-gradient(linear,0 0,0 bottom, from(rgba(255, 126, 22, 1)),to(rgba(229, 102, 0, 1)));
+  border: none;
+
+  margin-top: 10px;
 }
 .current_mode{
   position: absolute;

@@ -62,7 +62,11 @@ export default {
       console.log('连接成功')
     },
     wsMessage: function (evt) {
-      this.onlineStatus = JSON.parse(evt.data)
+      if (JSON.parse(evt.data).code === undefined) {
+        this.onlineStatus = JSON.parse(evt.data)
+      } else {
+        this.$message.success('发送成功')
+      }
     },
     wsClose: function () {
       console.log('连接关闭')

@@ -43,11 +43,15 @@ export default {
       console.log('连接成功')
     },
     wsMessage: function (evt) {
-      this.onlineStatus = JSON.parse(evt.data)[0].online
-      if (JSON.parse(evt.data)[0].status === 0 && this.onlineStatus === 1) {
-        this.currentMode = '待机模式'
-      } else if (JSON.parse(evt.data)[0].status === 1 && this.onlineStatus === 1) {
-        this.currentMode = '视频模式'
+      if (JSON.parse(evt.data).code === undefined) {
+        this.onlineStatus = JSON.parse(evt.data)[2].online
+        if (JSON.parse(evt.data)[2].status === 0 && this.onlineStatus === 1) {
+          this.currentMode = '待机模式'
+        } else if (JSON.parse(evt.data)[2].status === 1 && this.onlineStatus === 1) {
+          this.currentMode = '视频模式'
+        }
+      } else {
+        this.$message.success('发送成功')
       }
     },
     wsClose: function () {
@@ -56,7 +60,7 @@ export default {
     standbyMode: function () {
       if (this.onlineStatus === 1) {
         let data = {
-          device: [3],
+          deviceId: [3],
           status: 0,
           myDevice: 0
         }
@@ -69,7 +73,7 @@ export default {
     videoMode: function () {
       if (this.onlineStatus === 1) {
         let data = {
-          device: [3],
+          deviceId: [3],
           status: 1,
           myDevice: 0
         }
