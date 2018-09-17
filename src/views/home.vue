@@ -27,14 +27,15 @@
       <span :class="onlineStatus[9].online === 1 ? 'online': 'offline'" style="position: absolute;top: 72px;left: -60px;"></span>
       <span :class="onlineStatus[10].online === 1 ? 'online': 'offline'" style="position: absolute;top: 72px;left: 127px;"></span>
       <span :class="onlineStatus[11].online === 1 ? 'online': 'offline'" style="position: absolute;top: 100px;left: -60px;"></span>
-      <span :class="onlineStatus[11].online === 0 ? 'online': 'offline'" style="position: absolute;top: 100px;left: 127px;"></span>
-      <span :class="onlineStatus[0].online === 0 ? 'online': 'offline'" style="position: absolute;top: 128px;left: -60px;"></span>
-      <span :class="onlineStatus[0].online === 0 ? 'online': 'offline'" style="position: absolute;top: 128px;left: 127px;"></span>
-      <span :class="onlineStatus[0].online === 0 ? 'online': 'offline'" style="position: absolute;top: 156px;left: -60px;"></span>
-      <span :class="onlineStatus[0].online === 0 ? 'online': 'offline'" style="position: absolute;top: 156px;left: 127px;"></span>
-      <span :class="onlineStatus[0].online === 0 ? 'online': 'offline'" style="position: absolute;top: 184px;left: -60px;"></span>
-      <span :class="onlineStatus[0].online === 0 ? 'online': 'offline'" style="position: absolute;top: 184px;left: 127px;"></span>
-      <span :class="onlineStatus[0].online === 0 ? 'online': 'offline'" style="position: absolute;top: 212px;left: -60px;"></span>
+      <span :class="onlineStatus[12].online === 1 ? 'online': 'offline'" style="position: absolute;top: 100px;left: 127px;"></span>
+      <span :class="onlineStatus[13].online === 1 ? 'online': 'offline'" style="position: absolute;top: 128px;left: -60px;"></span>
+      <span :class="onlineStatus[14].online === 1 ? 'online': 'offline'" style="position: absolute;top: 128px;left: 127px;"></span>
+      <span :class="onlineStatus[15].online === 1 ? 'online': 'offline'" style="position: absolute;top: 156px;left: -60px;"></span>
+      <span :class="onlineStatus[16].online === 1 ? 'online': 'offline'" style="position: absolute;top: 156px;left: 127px;"></span>
+      <span :class="onlineStatus[17].online === 1 ? 'online': 'offline'" style="position: absolute;top: 184px;left: -60px;"></span>
+      <span :class="onlineStatus[18].online === 1 ? 'online': 'offline'" style="position: absolute;top: 184px;left: 127px;"></span>
+      <span :class="onlineStatus[19].online === 1 ? 'online': 'offline'" style="position: absolute;top: 212px;left: -60px;"></span>
+      <span :class="onlineStatus[19].online === 1 ? 'online': 'offline'" style="position: absolute;top: 212px;left: 127px;"></span>
     </div>
   </div>
 </template>
@@ -49,7 +50,7 @@ export default {
   },
   created () {
     if (navigator.onLine) {
-      this.webSocket = new WebSocket('ws://39.105.41.93:8181/renren-fast/websocket/0')
+      this.webSocket = new WebSocket(this.wsURL + 'websocket/0')
       this.webSocket.onopen = this.wsOpen
       this.webSocket.onmessage = this.wsMessage
       this.webSocket.onclose = this.wsClose

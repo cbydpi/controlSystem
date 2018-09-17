@@ -30,7 +30,7 @@ export default {
   },
   created () {
     if (navigator.onLine) {
-      this.webSocket = new WebSocket('ws://39.105.41.93:8181/renren-fast/websocket/0')
+      this.webSocket = new WebSocket(this.wsURL + 'websocket/0')
       this.webSocket.onopen = this.wsOpen
       this.webSocket.onmessage = this.wsMessage
       this.webSocket.onclose = this.wsClose

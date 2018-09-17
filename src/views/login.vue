@@ -49,7 +49,7 @@ export default {
           var formData = new FormData()
           formData.append('username', this.form.username)
           formData.append('password', this.form.password)
-          this.$http.post('http://39.105.41.93:8181/renren-fast/sys/login', formData).then(
+          this.$http.post(this.URL + 'sys/login', formData).then(
             function (res) {
               if (res.body.code === 0) {
                 this.$cookie.set('token', res.body.token, 0.001)

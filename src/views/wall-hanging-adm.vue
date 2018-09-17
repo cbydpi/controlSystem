@@ -8,7 +8,7 @@
       </div>
     </div>
     <el-row class='down'>
-      <el-col :span='12'>
+      <el-col :span='12' v-if="company_items_left.length > 1">
         <div style="padding-bottom: 10px;" v-for="(value, index) in company_items_left" :key='value.id'>
           <span v-text="index+1" :class="[showthisButton_left === index ? 'onlineClick': '', value.online === 1 ? 'online': 'offline']"></span>
           <span class="company_info" @click="showButtonLeft(index)" :class="showthisButton_left === index ? 'company_info_click': ''">logo</span>
@@ -18,8 +18,8 @@
           </div>
         </div>
       </el-col>
-      <el-col :span='12'>
-        <div style="padding-bottom: 10px;text-align: right;" v-for="(value, index) in company_items_right" :key='value.id'>
+      <el-col :span='12' v-if="company_items_right.length > 1">
+        <div style="padding-bottom: 10px;text-align: right;" v-for="(value, index) in company_items_right" :key='value.id' >
           <div class="button_list" v-if="showthisButton_right === index">
             <el-button type="primary" class="button_1" @click='chatMode(value.id, value.online)'>交互模式</el-button><br>
             <el-button type="warning" class='button_2' @click='chatMode(value.id, value.online)'>视频模式</el-button>
@@ -52,7 +52,7 @@ export default {
   },
   created () {
     if (navigator.onLine) {
-      this.webSocket = new WebSocket('ws://39.105.41.93:8181/renren-fast/websocket/0')
+      this.webSocket = new WebSocket(this.wsURL + 'websocket/0')
       this.webSocket.onopen = this.wsOpen
       this.webSocket.onmessage = this.wsMessage
       this.webSocket.onclose = this.wsClose
@@ -90,12 +90,15 @@ export default {
       let data = JSON.parse(evt.data)
       let _this = this
       data.forEach(function (value, key, array) {
-        if (key < 8) {
-          Vue.set(_this.company_items_left, key, value)
-        } else {
-          Vue.set(_this.company_items_right, key - 8, value)
+        if (key < 11 && key > 2) {
+          console.log(value.id)
+          Vue.set(_this.company_items_left, key - 3, value)
+        } else if (key > 12) {
+          console.log(value.id)
+          Vue.set(_this.company_items_right, key - 13, value)
         }
       })
+      console.log(this.company_items_right)
     },
     wsClose: function () {
       console.log('连接关闭')

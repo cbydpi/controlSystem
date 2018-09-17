@@ -31,7 +31,7 @@ export default {
   },
   created () {
     if (navigator.onLine) {
-      this.webSocket = new WebSocket('ws://39.105.41.93:8181/renren-fast/websocket/0')
+      this.webSocket = new WebSocket(this.wsURL + 'websocket/0')
       this.webSocket.onopen = this.wsOpen
       this.webSocket.onmessage = this.wsMessage
       this.webSocket.onclose = this.wsClose
@@ -50,6 +50,8 @@ export default {
           this.currentMode = '待机模式'
         } else if (JSON.parse(evt.data)[1].status === 1 && this.onlineStatus === 1) {
           this.currentMode = '视频模式'
+        } else if (JSON.parse(evt.data)[1].status === 2 && this.onlineStatus === 1) {
+          this.currentMode = '交互模式'
         }
       } else {
         this.$message.success('发送成功')
