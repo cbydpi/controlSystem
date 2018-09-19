@@ -62,7 +62,8 @@ export default {
         let data = {
           deviceId: [3],
           status: 0,
-          myDevice: 0
+          myDevice: 0,
+          code: 666
         }
         console.log(data)
         this.webSocket.send(JSON.stringify(data))
@@ -75,7 +76,8 @@ export default {
         let data = {
           deviceId: [3],
           status: 1,
-          myDevice: 0
+          myDevice: 0,
+          code: 666
         }
         console.log(data)
         this.webSocket.send(JSON.stringify(data))
