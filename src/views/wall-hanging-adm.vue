@@ -8,24 +8,24 @@
       </div>
     </div>
     <el-row class='down'>
-      <el-col :span='12' v-if="company_items_left.length > 1">
-        <div style="padding-bottom: 10px;" v-for="(value, index) in company_items_left" :key='value.id'>
-          <span v-text="index+1" :class="[showthisButton_left === index ? 'onlineClick': '', value.online === 1 ? 'online': 'offline']"></span>
-          <span class="company_info" @click="showButtonLeft(index)" :class="showthisButton_left === index ? 'company_info_click': ''">logo</span>
-          <div class="button_list" v-if="showthisButton_left === index">
-            <el-button type="primary" class="button_1" @click='chatMode(value.id, value.online)'>交互模式</el-button><br>
+      <el-col :span='12' v-if="company_items_right.length > 1">
+        <div style="padding-bottom: 10px;" v-for="(value, index) in company_items_right" :key='value.id'>
+          <span v-text="index+1" :class="[showthisButton_right === index ? 'onlineClick': '', value.online === 1 ? 'online': 'offline']"></span>
+          <span class="company_info" @click="showButtonRight(index)" :class="showthisButton_right === index ? 'company_info_click': ''">logo</span>
+          <div class="button_list" v-if="showthisButton_right === index">
+            <el-button type="primary" class="button_1" @click='chatMode(value.id, value.online)'>待机模式</el-button><br>
             <el-button type="warning" class='button_2' @click='videoMode(value.id, value.online)'>视频模式</el-button>
           </div>
         </div>
       </el-col>
-      <el-col :span='12' v-if="company_items_right.length > 1">
-        <div style="padding-bottom: 10px;text-align: right;" v-for="(value, index) in company_items_right" :key='value.id' >
-          <div class="button_list" v-if="showthisButton_right === index">
-            <el-button type="primary" class="button_1" @click='chatMode(value.id, value.online)'>交互模式</el-button><br>
-            <el-button type="warning" class='button_2' @click='chatMode(value.id, value.online)'>视频模式</el-button>
+      <el-col :span='12' v-if="company_items_left.length > 1">
+        <div style="padding-bottom: 10px;text-align: right;" v-for="(value, index) in reverseRight" :key='value.id' >
+          <div class="button_list" v-if="showthisButton_left === index">
+            <el-button type="primary" class="button_1" @click='chatMode(value.id, value.online)'>待机模式</el-button><br>
+            <el-button type="warning" class='button_2' @click='videoMode(value.id, value.online)'>视频模式</el-button>
           </div>
-          <span class="company_info" @click="showButtonRight(index)" :class="showthisButton_right === index ? 'company_info_click': ''">logo</span>
-          <span style="float: right;margin-left: 10px;" v-text="index+1" :class="[showthisButton_right === index ? 'onlineClick': '', value.online === 1 ? 'online': 'offline']"></span>
+          <span class="company_info" @click="showButtonLeft(index)" :class="showthisButton_left === index ? 'company_info_click': ''">logo</span>
+          <span style="float: right;margin-left: 10px;" v-text="index+1" :class="[showthisButton_left === index ? 'onlineClick': '', value.online === 1 ? 'online': 'offline']"></span>
         </div>
       </el-col>
     </el-row>
@@ -48,6 +48,16 @@ export default {
     const token = this.$cookie.get('token')
     if (!token || !/\S/.test(token)) {
       this.$router.push({path: '/login'})
+    }
+  },
+  computed: {
+    reverseRight: {
+      get () {
+        return this.company_items_left.reverse()
+      },
+      set () {
+        return this.company_items_left.reverse()
+      }
     }
   },
   created () {
@@ -90,18 +100,14 @@ export default {
       let data = JSON.parse(evt.data)
       let _this = this
       data.forEach(function (value, key, array) {
-        if (key < 11 && key > 2) {
-          console.log(value.id)
+        if (key <= 11 && key > 2) {
           Vue.set(_this.company_items_left, key - 3, value)
-        } else if (key > 12) {
-          console.log(value.id)
-          Vue.set(_this.company_items_right, key - 13, value)
+        } else if (key > 11) {
+          Vue.set(_this.company_items_right, key - 12, value)
         }
       })
-      console.log(this.company_items_right)
     },
     wsClose: function () {
-      console.log('连接关闭')
     },
     allWake: function () {
       let data = {
@@ -143,7 +149,7 @@ export default {
       if (online === 1) {
         let data = {
           deviceId: [id],
-          status: 2,
+          status: 0,
           myDevice: 0,
           code: 666
         }
@@ -181,17 +187,17 @@ export default {
 }
 .top{
   width: 100%;
-  height: 130px;
+  height: 90px;
   text-align: center;
   >h1{
     font-size: 24px;
-    margin: 16px 0;
+    margin: 6px 0;
   }
   >.border{
     width: 90%;
     height: 2px;
     background: #C9E0FF;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
   }

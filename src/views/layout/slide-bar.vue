@@ -19,7 +19,7 @@
         <i class="el-icon-arrow-right nav-right"></i>
       </el-menu-item>
       <el-menu-item index="/ice-screen">
-        <span slot="title" style="font-size: 24px;">冰屏</span>
+        <span slot="title" style="font-size: 24px;">迎宾屏</span>
         <i class="el-icon-arrow-right nav-right"></i>
       </el-menu-item>
       <el-menu-item index="/vertical-adm">

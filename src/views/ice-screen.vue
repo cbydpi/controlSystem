@@ -4,7 +4,7 @@
       <span :class="onlineStatus === 1 ? 'online': 'offline'"></span>
       <p class="ice_screen_real"></p>
       <div style="text-align: center;">
-        <span style="font-size: 24px;float: left;margin-top: 40px;margin-left: 50px;">冰屏</span>
+        <span style="font-size: 24px;float: left;margin-top: 40px;margin-left: 50px;">迎宾屏</span>
         <span class="current_mode">{{currentMode}}</span>
         <el-button type="primary" class="button_1" @click='standbyMode'>待机模式</el-button><br>
         <el-button type="warning" class='button_2' @click='videoMode'>视频模式</el-button>

@@ -1,41 +1,41 @@
 <template>
   <div class="home">
-    <div class="ice_screen">
+    <div class="ice_screen" v-if="onlineStatus.length > 10">
       <span class="ice_screen_logo"></span>
       <span>冰屏</span>
       <span :class="onlineStatus[0].online === 1 ? 'online': 'offline'"></span>
     </div>
-    <div class="vertical_adm">
+    <div class="vertical_adm" v-if="onlineStatus.length > 10">
       <span class="vertical_adm_logo"></span>
       <span>立式终端机</span>
       <span :class="onlineStatus[1].online === 1 ? 'online': 'offline'"></span>
     </div>
-    <div class="splice_screen">
+    <div class="splice_screen" v-if="onlineStatus.length > 10">
       <span class="splice_screen_logo"></span>
       <span>拼接屏</span>
       <span :class="onlineStatus[2].online === 1 ? 'online': 'offline'"></span>
     </div>
-    <div class="company_display">
+    <div class="company_display" v-if="onlineStatus.length > 10">
       <span class="company_display_logo"></span>
       <span>企业展厅</span>
-      <span :class="onlineStatus[3].online === 1 ? 'online': 'offline'" style="position: absolute;top: -12px;left: -60px;"></span>
-      <span :class="onlineStatus[4].online === 1 ? 'online': 'offline'" style="position: absolute;top: -12px;left: 127px;"></span>
-      <span :class="onlineStatus[5].online === 1 ? 'online': 'offline'" style="position: absolute;top: 16px;left: -60px;"></span>
-      <span :class="onlineStatus[6].online === 1 ? 'online': 'offline'" style="position: absolute;top: 16px;left: 127px;"></span>
-      <span :class="onlineStatus[7].online === 1 ? 'online': 'offline'" style="position: absolute;top: 44px;left: -60px;"></span>
-      <span :class="onlineStatus[8].online === 1 ? 'online': 'offline'" style="position: absolute;top: 44px;left: 127px;"></span>
-      <span :class="onlineStatus[9].online === 1 ? 'online': 'offline'" style="position: absolute;top: 72px;left: -60px;"></span>
-      <span :class="onlineStatus[10].online === 1 ? 'online': 'offline'" style="position: absolute;top: 72px;left: 127px;"></span>
-      <span :class="onlineStatus[11].online === 1 ? 'online': 'offline'" style="position: absolute;top: 100px;left: -60px;"></span>
-      <span :class="onlineStatus[12].online === 1 ? 'online': 'offline'" style="position: absolute;top: 100px;left: 127px;"></span>
-      <span :class="onlineStatus[13].online === 1 ? 'online': 'offline'" style="position: absolute;top: 128px;left: -60px;"></span>
-      <span :class="onlineStatus[14].online === 1 ? 'online': 'offline'" style="position: absolute;top: 128px;left: 127px;"></span>
-      <span :class="onlineStatus[15].online === 1 ? 'online': 'offline'" style="position: absolute;top: 156px;left: -60px;"></span>
-      <span :class="onlineStatus[16].online === 1 ? 'online': 'offline'" style="position: absolute;top: 156px;left: 127px;"></span>
-      <span :class="onlineStatus[17].online === 1 ? 'online': 'offline'" style="position: absolute;top: 184px;left: -60px;"></span>
-      <span :class="onlineStatus[18].online === 1 ? 'online': 'offline'" style="position: absolute;top: 184px;left: 127px;"></span>
-      <span :class="onlineStatus[19].online === 1 ? 'online': 'offline'" style="position: absolute;top: 212px;left: -60px;"></span>
-      <span :class="onlineStatus[19].online === 1 ? 'online': 'offline'" style="position: absolute;top: 212px;left: 127px;"></span>
+      <span :class="onlineStatus[3].online === 1 ? 'online': 'offline'" style="position: absolute;top: 212px;left: 127px;"></span>
+      <span :class="onlineStatus[4].online === 1 ? 'online': 'offline'" style="position: absolute;top: 184px;left: 127px;"></span>
+      <span :class="onlineStatus[5].online === 1 ? 'online': 'offline'" style="position: absolute;top: 156px;left: 127px;"></span>
+      <span :class="onlineStatus[6].online === 1 ? 'online': 'offline'" style="position: absolute;top: 128px;left: 127px;"></span>
+      <span :class="onlineStatus[7].online === 1 ? 'online': 'offline'" style="position: absolute;top: 100px;left: 127px;"></span>
+      <span :class="onlineStatus[8].online === 1 ? 'online': 'offline'" style="position: absolute;top: 72px;left: 127px;"></span>
+      <span :class="onlineStatus[9].online === 1 ? 'online': 'offline'" style="position: absolute;top: 44px;left: 127px;"></span>
+      <span :class="onlineStatus[10].online === 1 ? 'online': 'offline'" style="position: absolute;top: 16px;left: 127px;"></span>
+      <span :class="onlineStatus[11].online === 1 ? 'online': 'offline'" style="position: absolute;top: -12px;left: 127px;"></span>
+      <span :class="onlineStatus[20].online === 1 ? 'online': 'offline'" style="position: absolute;top: 212px;left: -60px;"></span>
+      <span :class="onlineStatus[19].online === 1 ? 'online': 'offline'" style="position: absolute;top: 184px;left: -60px;"></span>
+      <span :class="onlineStatus[18].online === 1 ? 'online': 'offline'" style="position: absolute;top: 156px;left: -60px;"></span>
+      <span :class="onlineStatus[17].online === 1 ? 'online': 'offline'" style="position: absolute;top: 128px;left: -60px;"></span>
+      <span :class="onlineStatus[16].online === 1 ? 'online': 'offline'" style="position: absolute;top: 100px;left: -60px;"></span>
+      <span :class="onlineStatus[15].online === 1 ? 'online': 'offline'" style="position: absolute;top: 72px;left: -60px;"></span>
+      <span :class="onlineStatus[14].online === 1 ? 'online': 'offline'" style="position: absolute;top: 44px;left: -60px;"></span>
+      <span :class="onlineStatus[13].online === 1 ? 'online': 'offline'" style="position: absolute;top: 16px;left: -60px;"></span>
+      <span :class="onlineStatus[12].online === 1 ? 'online': 'offline'" style="position: absolute;top: -12px;left: -60px;"></span>
     </div>
   </div>
 </template>
