@@ -1,9 +1,10 @@
 <template>
   <div class="wall_hanging__adm">
     <div class="top">
-      <h1>企业展厅</h1>
-      <el-button type="primary" class="allWake" @click='allWake'>一键唤醒</el-button>
-      <el-button type="warning" class='allStandby' @click='allStandby'>恢复待机</el-button>
+      <h1>企业画像</h1>
+      <el-button type="primary" class="allWake" @click='status1'>企业家</el-button>
+      <el-button type="warning" class='allStandby' @click='status2'>拔尖人才</el-button>
+      <el-button type="success" class='allStandby2' @click='status3'>园区领导</el-button>
       <div class="border">
       </div>
     </div>
@@ -11,7 +12,7 @@
       <el-col :span='12' v-if="company_items_right.length > 1">
         <div style="padding-bottom: 10px;" v-for="(value, index) in company_items_right" :key='value.id'>
           <span v-text="index+1" :class="[showthisButton_right === index ? 'onlineClick': '', value.online === 1 ? 'online': 'offline']"></span>
-          <span class="company_info" @click="showButtonRight(index)" :class="showthisButton_right === index ? 'company_info_click': ''">logo</span>
+          <span class="company_info" :class="showthisButton_right === index ? 'company_info_click': ''">logo</span>
           <div class="button_list" v-if="showthisButton_right === index">
             <el-button type="primary" class="button_1" @click='chatMode(value.id, value.online)'>待机模式</el-button><br>
             <el-button type="warning" class='button_2' @click='videoMode(value.id, value.online)'>视频模式</el-button>
@@ -19,12 +20,12 @@
         </div>
       </el-col>
       <el-col :span='12' v-if="company_items_left.length > 1">
-        <div style="padding-bottom: 10px;text-align: right;" v-for="(value, index) in reverseRight" :key='value.id' >
+        <div style="padding-bottom: 10px;text-align: right;" v-for="(value, index) in company_items_left" :key='value.id' >
           <div class="button_list" v-if="showthisButton_left === index">
             <el-button type="primary" class="button_1" @click='chatMode(value.id, value.online)'>待机模式</el-button><br>
             <el-button type="warning" class='button_2' @click='videoMode(value.id, value.online)'>视频模式</el-button>
           </div>
-          <span class="company_info" @click="showButtonLeft(index)" :class="showthisButton_left === index ? 'company_info_click': ''">logo</span>
+          <span class="company_info" :class="showthisButton_left === index ? 'company_info_click': ''">logo</span>
           <span style="float: right;margin-left: 10px;" v-text="index+1" :class="[showthisButton_left === index ? 'onlineClick': '', value.online === 1 ? 'online': 'offline']"></span>
         </div>
       </el-col>
@@ -48,16 +49,6 @@ export default {
     const token = this.$cookie.get('token')
     if (!token || !/\S/.test(token)) {
       this.$router.push({path: '/login'})
-    }
-  },
-  computed: {
-    reverseRight: {
-      get () {
-        return this.company_items_left.reverse() // eslint-disable-line
-      },
-      set () {
-        return this.company_items_left.reverse() // eslint-disable-line
-      }
     }
   },
   created () {
@@ -100,28 +91,37 @@ export default {
       let data = JSON.parse(evt.data)
       let _this = this
       data.forEach(function (value, key, array) {
-        if (key <= 11 && key > 2) {
-          Vue.set(_this.company_items_left, key - 3, value)
-        } else if (key > 11 && key < 21) {
-          Vue.set(_this.company_items_right, key - 12, value)
+        if (key <= 25 && key > 20) {
+          Vue.set(_this.company_items_left, key - 21, value)
+        } else if (key > 25) {
+          Vue.set(_this.company_items_right, key - 26, value)
         }
       })
     },
     wsClose: function () {
     },
-    allWake: function () {
+    status1: function () {
       let data = {
-        deviceId: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+        deviceId: [22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+        status: 0,
+        myDevice: 0,
+        code: 666
+      }
+      this.webSocket.send(JSON.stringify(data))
+    },
+    status2: function () {
+      let data = {
+        deviceId: [22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
         status: 1,
         myDevice: 0,
         code: 666
       }
       this.webSocket.send(JSON.stringify(data))
     },
-    allStandby: function () {
+    status3: function () {
       let data = {
-        deviceId: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
-        status: 0,
+        deviceId: [22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+        status: 2,
         myDevice: 0,
         code: 666
       }
@@ -187,28 +187,24 @@ export default {
 }
 .top{
   width: 100%;
-  height: 90px;
+  height: 171px;
   text-align: center;
   >h1{
     font-size: 24px;
-    margin: 6px 0;
+    margin: 26px 0;
   }
   >.border{
     width: 90%;
     height: 2px;
     background: #C9E0FF;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
   }
 }
 .down{
   flex: 1;
-  padding: 2% 5% 0 5%;
-  background: url(../assets/img/machine_up.png),url(../assets/img/machine_down.png);
-  background-repeat: no-repeat;
-  background-position: center 70px,center 260px;
-  background-size: 150px 150px,150px 150px;
+  padding: 12% 5% 0 5%;
 }
 .allWake{
   border-radius: 10px;
@@ -220,6 +216,13 @@ export default {
   border-radius: 10px;
   font-size: 18px;
   background-image: -webkit-gradient(linear,0 0,0 bottom, from(rgba(77, 153, 255, 1)),to(rgba(24, 122, 254, 1)));
+  border: none;
+  margin-left: 30px;
+}
+.allStandby2{
+  border-radius: 10px;
+  font-size: 18px;
+  background: #67c23a;
   border: none;
   margin-left: 30px;
 }

@@ -19,6 +19,7 @@ export default new Router({
         { path: '/ice-screen', component: _import('ice-screen'), name: 'ice-screen', desc: '冰屏', meta: {auth: true} },
         { path: '/vertical-adm', component: _import('vertical-adm'), name: 'vertical-adm', desc: '立式广告机', meta: {auth: true} },
         { path: '/splice-screen', component: _import('splice-screen'), name: 'splice-screen', desc: '拼接屏', meta: {auth: true} },
+        { path: '/protrait', component: _import('protrait'), name: 'protrait', desc: '画像屏', meta: {auth: true} },
         { path: '/wall-hanging-adm', component: _import('wall-hanging-adm'), name: 'wall-hanging-adm', desc: '壁挂机', meta: {auth: true} }
       ],
       beforeEnter (to, from, next) {

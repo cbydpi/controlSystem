@@ -26,6 +26,10 @@
         <span slot="title" style="font-size: 24px;">立式终端机</span>
         <i class="el-icon-arrow-right nav-right"></i>
       </el-menu-item>
+      <el-menu-item index="/protrait">
+        <span slot="title" style="font-size: 24px;">画像屏</span>
+        <i class="el-icon-arrow-right nav-right"></i>
+      </el-menu-item>
       <el-menu-item index="/splice-screen">
         <span slot="title" style="font-size: 24px;">拼接屏</span>
         <i class="el-icon-arrow-right nav-right"></i>
@@ -54,8 +58,8 @@ export default {
   border: none;
 }
 .el-menu-item{
-  height: 90px !important;
-  line-height: 90px !important;
+  height: 80px !important;
+  line-height: 80px !important;
 }
 .logo{
   width: 220px;
