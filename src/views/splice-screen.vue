@@ -4,10 +4,12 @@
       <p class="splice_screen_real"></p>
       <span :class="onlineStatus === 1 ? 'online': 'offline'"></span>
       <div style="text-align: center;">
-        <span style="font-size: 24px;float: left;margin-top: 40px;margin-left: 50px;">拼接屏</span>
+        <span style="font-size: 24px;float: left;margin-top: 70px;margin-left: 50px;">拼接屏</span>
         <span class="current_mode">{{currentMode}}</span>
         <el-button type="primary" class="button_1" @click='standbyMode'>待机模式</el-button><br>
-        <el-button type="warning" class='button_2' @click='videoMode'>视频模式</el-button>
+        <el-button type="warning" class='button_2' @click='videoMode'>视频模式</el-button><br>
+        <el-button type="warning" class='pre_step' @click='preStep'>上一步</el-button>
+        <el-button type="warning" class='next_step' @click='nextStep'>下一步</el-button>
       </div>
     </div>
   </div>
@@ -65,7 +67,7 @@ export default {
           myDevice: 0,
           code: 666
         }
-        console.log(data)
+
         this.webSocket.send(JSON.stringify(data))
       } else {
         this.$message.error('此设备不在线!')
@@ -79,7 +81,35 @@ export default {
           myDevice: 0,
           code: 666
         }
-        console.log(data)
+
+        this.webSocket.send(JSON.stringify(data))
+      } else {
+        this.$message.error('此设备不在线!')
+      }
+    },
+    nextStep: function () {
+      if (this.onlineStatus === 1) {
+        let data = {
+          deviceId: [3],
+          status: 2,
+          myDevice: 0,
+          code: 666
+        }
+
+        this.webSocket.send(JSON.stringify(data))
+      } else {
+        this.$message.error('此设备不在线!')
+      }
+    },
+    preStep: function () {
+      if (this.onlineStatus === 1) {
+        let data = {
+          deviceId: [3],
+          status: 3,
+          myDevice: 0,
+          code: 666
+        }
+
         this.webSocket.send(JSON.stringify(data))
       } else {
         this.$message.error('此设备不在线!')
@@ -143,6 +173,22 @@ export default {
   background-image: -webkit-gradient(linear,0 0,0 bottom, from(rgba(255, 217, 30, 1)),to(rgba(255, 160, 30, 1)));
   border: none;
   margin-left: -20px;
+}
+.next_step {
+  margin-top: 18px;
+  border-radius: 10px;
+  font-size: 18px;
+  background-image: -webkit-gradient(linear,0 0,0 bottom, from(rgba(255, 126, 22, 1)),to(rgba(229, 102, 0, 1)));
+  border: none;
+  margin-left: 10px;
+}
+.pre_step {
+  margin-top: 18px;
+  border-radius: 10px;
+  font-size: 18px;
+  background: #67c23a;
+  border: none;
+  margin-left: -40px;
 }
 .current_mode{
   position: absolute;
