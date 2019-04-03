@@ -93,7 +93,7 @@ export default {
       data.forEach(function (value, key, array) {
         if (key <= 25 && key > 20) {
           Vue.set(_this.company_items_left, key - 21, value)
-        } else if (key > 25) {
+        } else if (key > 25 && key < 31) {
           Vue.set(_this.company_items_right, key - 26, value)
         }
       })

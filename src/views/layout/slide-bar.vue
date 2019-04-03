@@ -22,6 +22,10 @@
         <span slot="title" style="font-size: 24px;">迎宾屏</span>
         <i class="el-icon-arrow-right nav-right"></i>
       </el-menu-item>
+      <el-menu-item index="/ice">
+        <span slot="title" style="font-size: 24px;">冰屏</span>
+        <i class="el-icon-arrow-right nav-right"></i>
+      </el-menu-item>
       <el-menu-item index="/vertical-adm">
         <span slot="title" style="font-size: 24px;">立式终端机</span>
         <i class="el-icon-arrow-right nav-right"></i>
@@ -58,8 +62,8 @@ export default {
   border: none;
 }
 .el-menu-item{
-  height: 70px !important;
-  line-height: 70px !important;
+  height: 60px !important;
+  line-height: 60px !important;
 }
 .logo{
   width: 220px;
@@ -89,7 +93,7 @@ export default {
   font-size: 24px;
   position: absolute;
   right: 0;
-  line-height: 90px;
+  line-height: 60px;
 }
 .is-active{
   background-color: #0057cc !important;

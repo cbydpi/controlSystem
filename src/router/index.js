@@ -16,6 +16,7 @@ export default new Router({
       desc: '上左右整体布局',
       children: [
         { path: '/home', component: _import('home'), name: 'home', desc: '首页', meta: {auth: true} },
+        { path: '/ice', component: _import('ice'), name: 'ice', desc: '冰屏', meta: {auth: true} },
         { path: '/ice-screen', component: _import('ice-screen'), name: 'ice-screen', desc: '冰屏', meta: {auth: true} },
         { path: '/vertical-adm', component: _import('vertical-adm'), name: 'vertical-adm', desc: '立式广告机', meta: {auth: true} },
         { path: '/splice-screen', component: _import('splice-screen'), name: 'splice-screen', desc: '拼接屏', meta: {auth: true} },
