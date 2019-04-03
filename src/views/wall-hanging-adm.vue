@@ -10,22 +10,28 @@
     <el-row class='down'>
       <el-col :span='12' v-if="company_items_right.length > 1">
         <div style="padding-bottom: 10px;" v-for="(value, index) in company_items_right" :key='value.id'>
-          <span v-text="index+1" :class="[showthisButton_right === index ? 'onlineClick': '', value.online === 1 ? 'online': 'offline']"></span>
-          <span class="company_info" @click="showButtonRight(index)" :class="showthisButton_right === index ? 'company_info_click': ''">logo</span>
-          <div class="button_list" v-if="showthisButton_right === index">
+          <span v-text="9-index" :class="[showthisButton_right === value.id ? 'onlineClick': '', value.online === 1 ? 'online': 'offline']"></span>
+          <span class="company_info" @click="showButtonRight(value.id)" :class="showthisButton_right === value.id ? 'company_info_click': ''">logo</span>
+          <div class="button_list" v-if="showthisButton_right === value.id">
             <el-button type="primary" class="button_1" @click='chatMode(value.id, value.online)'>待机模式</el-button><br>
             <el-button type="warning" class='button_2' @click='videoMode(value.id, value.online)'>视频模式</el-button>
           </div>
         </div>
       </el-col>
+
+      <div style="text-align: center;margin: 0 auto;position: absolute;left: 44%;top: 35%;" v-if='showthisButton_left !== -1 || showthisButton_right !== -1'>
+        <el-button type="primary" class="button_1" @click='prevItem'>上一页</el-button><br />
+        <el-button type="primary" class="button_2" @click='nextItem'>下一页</el-button>
+      </div>
+
       <el-col :span='12' v-if="company_items_left.length > 1">
         <div style="padding-bottom: 10px;text-align: right;" v-for="(value, index) in reverseRight" :key='value.id' >
-          <div class="button_list" v-if="showthisButton_left === index">
+          <div class="button_list" v-if="showthisButton_left === value.id">
             <el-button type="primary" class="button_1" @click='chatMode(value.id, value.online)'>待机模式</el-button><br>
             <el-button type="warning" class='button_2' @click='videoMode(value.id, value.online)'>视频模式</el-button>
           </div>
-          <span class="company_info" @click="showButtonLeft(index)" :class="showthisButton_left === index ? 'company_info_click': ''">logo</span>
-          <span style="float: right;margin-left: 10px;" v-text="index+1" :class="[showthisButton_left === index ? 'onlineClick': '', value.online === 1 ? 'online': 'offline']"></span>
+          <span class="company_info" @click="showButtonLeft(value.id)" :class="showthisButton_left === value.id ? 'company_info_click': ''">logo</span>
+          <span style="float: right;margin-left: 10px;" v-text="index+10" :class="[showthisButton_left === value.id ? 'onlineClick': '', value.online === 1 ? 'online': 'offline']"></span>
         </div>
       </el-col>
     </el-row>
@@ -99,13 +105,15 @@ export default {
     wsMessage: function (evt) {
       let data = JSON.parse(evt.data)
       let _this = this
-      data.forEach(function (value, key, array) {
-        if (key <= 11 && key > 2) {
-          Vue.set(_this.company_items_left, key - 3, value)
-        } else if (key > 11 && key < 21) {
-          Vue.set(_this.company_items_right, key - 12, value)
-        }
-      })
+      if (data.code === undefined) {
+        data.forEach(function (value, key, array) {
+          if (key <= 11 && key > 2) {
+            Vue.set(_this.company_items_left, key - 3, value)
+          } else if (key > 11 && key < 21) {
+            Vue.set(_this.company_items_right, key - 12, value)
+          }
+        })
+      }
     },
     wsClose: function () {
     },
@@ -128,6 +136,36 @@ export default {
       this.webSocket.send(JSON.stringify(data))
     },
     showButtonLeft: function (index) {
+      if (this.showthisButton_left !== -1) {
+        console.log(this.showthisButton_left + 'start')
+        let data = {
+          deviceId: [this.showthisButton_left],
+          status: 3,
+          myDevice: 0,
+          code: 666
+        }
+        this.webSocket.send(JSON.stringify(data))
+      }
+      if (this.showthisButton_right !== -1) {
+        console.log(this.showthisButton_right + 'start')
+        let data = {
+          deviceId: [this.showthisButton_right],
+          status: 3,
+          myDevice: 0,
+          code: 666
+        }
+        this.webSocket.send(JSON.stringify(data))
+      }
+      if (this.showthisButton_left !== index) {
+        console.log(index + 'stop')
+        let data = {
+          deviceId: [index],
+          status: 3,
+          myDevice: 0,
+          code: 666
+        }
+        this.webSocket.send(JSON.stringify(data))
+      }
       if (this.showthisButton_left === index) {
         this.showthisButton_left = -1
         this.showthisButton_right = -1
@@ -137,6 +175,36 @@ export default {
       }
     },
     showButtonRight: function (index) {
+      if (this.showthisButton_left !== -1) {
+        console.log(this.showthisButton_left + 'start')
+        let data = {
+          deviceId: [this.showthisButton_left],
+          status: 3,
+          myDevice: 0,
+          code: 666
+        }
+        this.webSocket.send(JSON.stringify(data))
+      }
+      if (this.showthisButton_right !== -1) {
+        console.log(this.showthisButton_right + 'start')
+        let data = {
+          deviceId: [this.showthisButton_right],
+          status: 3,
+          myDevice: 0,
+          code: 666
+        }
+        this.webSocket.send(JSON.stringify(data))
+      }
+      if (this.showthisButton_right !== index) {
+        console.log(index + 'stop')
+        let data = {
+          deviceId: [index],
+          status: 2,
+          myDevice: 0,
+          code: 666
+        }
+        this.webSocket.send(JSON.stringify(data))
+      }
       if (this.showthisButton_right === index) {
         this.showthisButton_right = -1
         this.showthisButton_left = -1
@@ -170,6 +238,28 @@ export default {
       } else {
         this.$message.error('此设备不在线!')
       }
+    },
+    prevItem () {
+      let id = this.showthisButton_left === -1 ? this.showthisButton_right : this.showthisButton_left
+      let data = {
+        deviceId: [id],
+        status: 4,
+        myDevice: 0,
+        code: 666
+      }
+      console.log(JSON.stringify(data))
+      this.webSocket.send(JSON.stringify(data))
+    },
+    nextItem () {
+      let id = this.showthisButton_left === -1 ? this.showthisButton_right : this.showthisButton_left
+      let data = {
+        deviceId: [id],
+        status: 5,
+        myDevice: 0,
+        code: 666
+      }
+      console.log(JSON.stringify(data))
+      this.webSocket.send(JSON.stringify(data))
     }
   },
   beforeDestroy () {

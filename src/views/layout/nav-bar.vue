@@ -2,10 +2,10 @@
   <div class="nav_bar">
     <span class="tip">设备连接状态：红色表示离线、绿色表示已连接。</span>
     <div class="user_info">
-      <i class="cbiconfont cbicon-yonghu"></i>&nbsp;&nbsp;
+      <i class="cbiconfont cbicon-yonghu" style="font-size: 26px;"></i>&nbsp;&nbsp;
       {{username}}&nbsp;&nbsp;
       <i class="el-icon-refresh" style="font-size: 26px;cursor: pointer;" @click="refresh"></i>&nbsp;&nbsp;
-      <i class="cbiconfont cbicon-tuichu" @click="signout"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <i class="cbiconfont cbicon-tuichu" @click="signout" style="font-size: 26px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
   </div>
 </template>

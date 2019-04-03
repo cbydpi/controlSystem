@@ -58,8 +58,8 @@ export default {
   border: none;
 }
 .el-menu-item{
-  height: 80px !important;
-  line-height: 80px !important;
+  height: 70px !important;
+  line-height: 70px !important;
 }
 .logo{
   width: 220px;
